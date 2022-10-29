@@ -6,16 +6,37 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D _rb;
     [Header("歩行速度"), SerializeField] float _walkSpeed = 10;
+    /// <summary>Playerのアニメーター</summary>
     Animator _anim;
+    /// <summary>動いていないとき、Playerの向く方向を固定する</summary>
     Vector2 foward;
-    // Start is called before the first frame update
+    GameManager GM;
+    [Header("敵のタグ名を入れてください"), SerializeField] string _enemyTag;
+    [Header("クリア判定となるオブジェクトのタグ名"), SerializeField] string _clearTag;
+    [Header("スコア加点となるオブジェクトのタグ名"), SerializeField] string _scoreTag;
+    [Header("スコア加点数"), SerializeField] int _score = 100;
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();  
         _anim = GetComponent<Animator>();
+
+        //GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+        if( _enemyTag == "")
+        {
+            Debug.Log("Playerのスクリプトに敵のタグ名を入れてください");
+        }
+        else if (_clearTag == "")
+        {
+            Debug.Log("Playerのスクリプトにクリア判定となるオブジェクトのタグ名を入れてください");
+        }
+        else if (_scoreTag == "")
+        {
+            Debug.Log("Playerのスクリプトにスコア加点となるオブジェクトのタグ名を入れてください");
+        }
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -34,7 +55,8 @@ public class PlayerController : MonoBehaviour
             _anim.SetFloat("Walk.y", _rb.velocity.y);
             _anim.SetFloat("Walk.x", _rb.velocity.x);
             if (_rb.velocity.x < 0)
-            {
+            {　
+                //左横移動するときPlayerを反転
                 transform.rotation = Quaternion.Euler(0,180,0);
             }
             if (_rb.velocity.x > 0)
@@ -47,6 +69,22 @@ public class PlayerController : MonoBehaviour
             _anim.SetBool("Walk",false);
             _anim.SetFloat("Idle.y", foward.y);
             _anim.SetFloat("Idle.x", foward.x);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag(_enemyTag))
+        {
+            //GM.GameOver();
+        }
+        else if(other.gameObject.CompareTag(_clearTag))
+        {
+            //GM.EscapeText();
+        }
+        else if(other.gameObject.CompareTag(_scoreTag))
+        {
+            //GM.AddScore(_score);
         }
     }
 }

@@ -178,6 +178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed: 7.29
+  _enemyTag: Enemy
+  _clearTag: Clear
+  _scoreTag: Score
+  _score: 100
 --- !u!212 &861716106
 SpriteRenderer:
   m_ObjectHideFlags: 0
