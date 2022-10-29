@@ -12,13 +12,14 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     float _time;
     [SerializeField] float _maxTime = 100;
     private Text _resultTimeText;
-    protected override bool _dontDestroyOnLoad { get{ return true; } }
+    protected override bool _dontDestroyOnLoad { get { return true; } }
 
     void Start()
     {
-        _resultScoreText = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Text>();
+
+        _resultScoreText = GameObject.FindGameObjectWithTag("Respawn")?.GetComponent<Text>();
         if (_resultScoreText) _resultScoreText.text = _tempScore.ToString("0000000");
-        _resultTimeText = GameObject.FindGameObjectWithTag("Finish").GetComponent<Text>();
+        _resultTimeText = GameObject.FindGameObjectWithTag("Finish")?.GetComponent<Text>();
         if (_resultTimeText) _resultTimeText.text = string.Format("{0:00.00}", _time);
     }
     /// <summary>アプリケーションの終了</summary>
@@ -30,7 +31,7 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     /// <param name="_loadSceneName"></param>
     public void SceneLoad(string _loadSceneName)
     {
-        StartCoroutine(SceneLoadStart(_loadSceneName,3f));
+        StartCoroutine(SceneLoadStart(_loadSceneName, 3f));
     }
     /// <summary>0.5秒遅延するシーンのロード</summary>
     /// <param name="_loadSceneName"></param>
@@ -47,7 +48,7 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     }
     /// <summary>スコアをインスタンス化したスクリプトへ移動</summary>
     /// <param name="score"></param>
-    public void Temp(float score,float time)
+    public void Temp(float score, float time)
     {
         _tempScore = score;
         _time = _maxTime - time;
