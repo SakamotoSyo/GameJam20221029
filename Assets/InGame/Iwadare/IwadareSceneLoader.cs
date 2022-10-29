@@ -13,6 +13,14 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     [SerializeField] float _maxTime;
     private Text _resultTimeText;
     protected override bool _dontDestroyOnLoad { get{ return true; } }
+
+    void Start()
+    {
+        _resultScoreText = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Text>();
+        if (_resultScoreText) _resultScoreText.text = _tempScore.ToString("D7");
+        _resultTimeText = GameObject.FindGameObjectWithTag("Finish").GetComponent<Text>();
+        if (_resultTimeText) _resultTimeText.text = string.Format("{0:00.00}", _time);
+    }
     /// <summary>アプリケーションの終了</summary>
     public void EndGame()
     {
@@ -48,9 +56,6 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     /// <param name="level"></param>
     private void OnLevelWasLoaded(int level)
     {
-        _resultScoreText = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Text>();
-        if (_resultScoreText) _resultScoreText.text = _tempScore.ToString("D7");
-        _resultTimeText = GameObject.FindGameObjectWithTag("Finish").GetComponent<Text>();
-        if (_resultTimeText) _resultTimeText.text = string.Format("{0:00.00}", _time);
+        Start();
     }
 }
