@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7045431416141091039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7045431416141091038}
+  - component: {fileID: 7045431416141091036}
+  - component: {fileID: 7045431416141091037}
+  m_Layer: 0
+  m_Name: Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7045431416141091038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045431416141091039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7045431416141091036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045431416141091039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547baf3363ca836499c01160883fb2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7045431416141091037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045431416141091039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf9082ad03c6ec4099cc1d9ea8d4762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stageObjects:
+  - obj: {fileID: 6715322266432502546, guid: ac3a4a32905c15346850bee510e90e7f, type: 3}
+    key: 87
+  - obj: {fileID: 1122072320528021124, guid: 7fe8606752553d646bec523a77fed85f, type: 3}
+    key: 79
+  - obj: {fileID: 6917382622778427886, guid: a3c56dc5674bea54baad3ceee3543cd4, type: 3}
+    key: 69
+  - obj: {fileID: 4359203218813961824, guid: 60d3d1dc51d687243959c34ebb35089b, type: 3}
+    key: 83
+  _width: 13
+  _height: 13
+  _playerPrefab: {fileID: 7088110862982117863, guid: 9132672743394a849b453723b1b20ecc, type: 3}
