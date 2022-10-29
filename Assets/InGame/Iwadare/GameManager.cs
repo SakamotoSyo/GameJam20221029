@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _catchPlayerText;
     [Tooltip("脱出した際のテキスト表示")]
     [SerializeField] GameObject _escapeText;
+    public event System.Action TimeOver;
     [Tooltip("スコア")]
     int _score = 0;
     bool _loading;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
         if(_countDown <= 0 && !_loading)
         {
+            TimeOver();
             _timeOverText.SetActive(true);
             _loading = true;
             IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);

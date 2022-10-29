@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
 
         GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        GM.TimeOver += TimeOver;
 
         if (_enemyTag == "")
         {
@@ -72,15 +73,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void TimeOver() 
+    {
+        _walkSpeed = 0;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(_enemyTag))
         {
             GM.GameOver();
+            _walkSpeed = 0;
         }
         else if (collision.gameObject.CompareTag(_clearTag))
         {
             GM.EscapeText();
+            _walkSpeed = 0;
         }
         else if (collision.gameObject.CompareTag(_scoreTag))
         {
