@@ -16,7 +16,7 @@ public class FadeIn : MonoBehaviour
         _fadePanel.raycastTarget = false;
         StartCoroutine(Fade(1.5f));
     }
-    IEnumerator Fade(float interval)
+     public IEnumerator Fade(float interval)
     {
         Color color = _fadePanel.color;
         color.a = 1f;

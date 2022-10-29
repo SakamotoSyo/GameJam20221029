@@ -27,7 +27,7 @@ public class FadeOut : MonoBehaviour
     /// フェードアウト
     /// </summary>
     /// <param name="fadeTime">実行時間</param>
-    IEnumerator Fade(float fadeTime)
+    public IEnumerator Fade(float fadeTime, bool load = true)
     {
         Color color = _fadePanel.color;
         _fadePanel.color = color;
@@ -44,7 +44,10 @@ public class FadeOut : MonoBehaviour
             if (color.a >= 1f)
             {
                 color.a = 1f;
-                Load(_sceneName);
+                if (load) 
+                {
+                    Load(_sceneName);
+                }
             }
         }
     }
