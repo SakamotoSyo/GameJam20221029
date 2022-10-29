@@ -8,7 +8,9 @@ public class EnemyScript : MonoBehaviour
     [Header("キャラクターのスピード")]
     [SerializeField] int _speed = 0;
     [Header("回転にかける時間")]
-    [SerializeField] int _rotationTime = 0;
+    [SerializeField] int _stopTime = 0;
+    [Header("方向を変える時間")]
+    [SerializeField] float _dirTime = 0;
 
     [Tooltip("敵が向いている方向")] Vector2 _dir;
     [Tooltip("現在回転中かどうか")] bool _isWait = false;
@@ -16,13 +18,14 @@ public class EnemyScript : MonoBehaviour
     int[] _rotateArray = { 0, 90, 180, 270 };
     Vector2[] _dirArray = { new Vector2(0, -1), new Vector2(-1, 0), new Vector2(0, 1), new Vector2(1, 0) };
     Coroutine _rotationCor;
+    float _countTime;
     WaitForSeconds _time;
 
     void Start()
     {
         _dir = new Vector2(0, -1);
         _rb = GetComponent<Rigidbody2D>();
-        _time = new WaitForSeconds(_rotationTime);
+        _time = new WaitForSeconds(_stopTime);
     }
 
     void Update()
@@ -34,17 +37,32 @@ public class EnemyScript : MonoBehaviour
     {
         if (!_isWait)
         {
+
             //下方向にRayをだす
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, _dir, 1);
+            RaycastHit2D[] hit = Physics2D.RaycastAll(transform.position, _dir, 1);
             Debug.DrawRay(transform.position, _dir, Color.red);
-            if (hit.collider != null)
+            if (hit.Length > 0)
             {
-                if (_rotationCor == null && hit.collider.tag == "Wall")
+                for (int i = 0; i < hit.Length; i++)
                 {
-                    Debug.Log("入っている");
-                    _rotationCor = StartCoroutine(EnemyWait());
+                    if (hit[i].collider.tag == "Wall")
+                    {
+                        Debug.Log("入っている");
+                        _rotationCor = StartCoroutine(EnemyWait());
+                    }
+
                 }
+
             }
+
+            _countTime += Time.deltaTime;
+
+            if (_dirTime < _countTime) 
+            {
+                _rotationCor = StartCoroutine(EnemyWait());
+                _countTime = 0;
+            }
+
 
             _rb.velocity = _dir.normalized * _speed;
         }
