@@ -64,7 +64,6 @@ public class ObjectConverter : MonoBehaviour
                     if (lines[i][j] == 'S')
                     {
                         Instantiate(_playerPrefab, new Vector3(i * 1.28f - (_width / 2), j * 1.28f - (_height / 2) - 1.75f, 0), Quaternion.identity);
-                        Debug.Log("ê∂ê¨");
                     }
                 }
                 else
