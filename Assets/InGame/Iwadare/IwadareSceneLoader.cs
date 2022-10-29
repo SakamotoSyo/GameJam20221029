@@ -22,12 +22,18 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     /// <param name="_loadSceneName"></param>
     public void SceneLoad(string _loadSceneName)
     {
-        StartCoroutine(SceneLoadStart(_loadSceneName));
+        StartCoroutine(SceneLoadStart(_loadSceneName,3f));
+    }
+    /// <summary>0.5秒遅延するシーンのロード</summary>
+    /// <param name="_loadSceneName"></param>
+    public void TitleResultSceneLoad(string _loadSceneName)
+    {
+        StartCoroutine(SceneLoadStart(_loadSceneName, 0.5f));
     }
 
-    IEnumerator SceneLoadStart(string _loadSceneName)
+    IEnumerator SceneLoadStart(string _loadSceneName, float gameovertime)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(gameovertime);
         Debug.Log("GameOver");
         SceneManager.LoadScene(_loadSceneName);
     }
