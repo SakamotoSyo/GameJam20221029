@@ -16,6 +16,7 @@ public class ObjectConverter : MonoBehaviour
     [SerializeField] StageObject[] _stageObjects;
     [SerializeField] int _width = 13;
     [SerializeField] int _height = 13;
+    [SerializeField] Transform _objRoot;
     [Header("プレイヤーのプレファブ"), SerializeField] GameObject _playerPrefab;
     StringGenerate _stringGenerate;
 
@@ -58,7 +59,7 @@ public class ObjectConverter : MonoBehaviour
             {
                 if(_tileDic.TryGetValue(lines[i][j], out GameObject value))
                 {
-                    Instantiate(value, new Vector3(i * 1.28f - (_width / 2), j * 1.28f - (_height / 2) - 1.75f, 0), Quaternion.identity);
+                    Instantiate(value, new Vector3(i * 1.28f - (_width / 2), j * 1.28f - (_height / 2) - 1.75f, 0), Quaternion.identity, _objRoot);
 
                     if (lines[i][j] == 'S')
                     {
