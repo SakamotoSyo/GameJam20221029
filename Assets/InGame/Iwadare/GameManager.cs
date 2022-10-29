@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _escapeText;
     [Tooltip("スコア")]
     int _score = 0;
+    bool _loading;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +40,10 @@ public class GameManager : MonoBehaviour
             _time.text = string.Format("{0:00.00}", _countDown);
             _countDown = Mathf.Max(0f, _countDown - Time.deltaTime);
         }
-        if(_countDown <= 0)
+        if(_countDown <= 0 && !_loading)
         {
             _timeOverText.SetActive(true);
+            _loading = true;
             IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);
         }
         
@@ -57,18 +59,22 @@ public class GameManager : MonoBehaviour
     /// <summary>幽霊につかまった際のメソッド</summary>
     public void GameOver()
     {
-        _catchPlayerText.SetActive(true);
-        IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);
+        if (!_loading)
+        {
+            _catchPlayerText.SetActive(true);
+            _loading = true;
+            IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);
+        }
     }
     /// <summary>脱出した際のメソッド</summary>
     public void EscapeText()
     {
-        _escapeText.SetActive(true);
-        IwadareSceneLoader.Instance.Temp(_score);
-        IwadareSceneLoader.Instance.SceneLoad(_gameCrearScene);
-    }
-    private void OnLevelWasLoaded(int level)
-    {
-        //_countDown = 100f;
+        if (!_loading)
+        {
+            _escapeText.SetActive(true);
+            _loading = true;
+            IwadareSceneLoader.Instance.Temp(_score, _countDown);
+            IwadareSceneLoader.Instance.SceneLoad(_gameCrearScene);
+        }
     }
 }
