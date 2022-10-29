@@ -11,10 +11,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text _scoreText;
     [Tooltip("時間")]
     [SerializeField] float _countDown = 100f;
+    [Header("ゲームオーバーシーン(なかったらタイトルシーン)")]
     [Tooltip("ゲームオーバーシーン(なかったらタイトルシーン)")]
-    [SerializeField] string _gameOverSceneName;
+    [SerializeField] string _gameOverScene;
+    [Header("ゲームクリアシーン")]
     [Tooltip("ゲームクリアシーン")]
-    [SerializeField] string _gameCrearSceneName;
+    [SerializeField] string _gameCrearScene;
     [Tooltip("タイムオーバーの際のテキスト表示")]
     [SerializeField] GameObject _timeOverText;
     [Tooltip("幽霊につかまった際のテキスト表示")]
@@ -40,11 +42,11 @@ public class GameManager : MonoBehaviour
         if(_countDown <= 0)
         {
             _timeOverText.SetActive(true);
-            IwadareSceneLoader.Instance.SceneLoad(_gameOverSceneName);
+            IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);
         }
         
     }
-    /// <summary>スコアの追加のメソット</summary>
+    /// <summary>スコアの追加のメソッド</summary>
     /// <param name="score"></param>
     public void AddScore(int score)
     {
@@ -56,13 +58,14 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _catchPlayerText.SetActive(true);
-        IwadareSceneLoader.Instance.SceneLoad(_gameOverSceneName);
+        IwadareSceneLoader.Instance.SceneLoad(_gameOverScene);
     }
     /// <summary>脱出した際のメソッド</summary>
     public void EscapeText()
     {
         _escapeText.SetActive(true);
-        IwadareSceneLoader.Instance.SceneLoad(_gameCrearSceneName);
+        IwadareSceneLoader.Instance.Temp(_score);
+        IwadareSceneLoader.Instance.SceneLoad(_gameCrearScene);
     }
     private void OnLevelWasLoaded(int level)
     {
