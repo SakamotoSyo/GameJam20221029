@@ -17,12 +17,12 @@ public class PlayerController : MonoBehaviour
     [Header("スコア加点数"), SerializeField] int _score = 100;
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();  
+        _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
 
-        //GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        GM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        if( _enemyTag == "")
+        if (_enemyTag == "")
         {
             Debug.Log("Playerのスクリプトに敵のタグ名を入れてください");
         }
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   
+
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -44,20 +44,20 @@ public class PlayerController : MonoBehaviour
 
         if (x != 0 || y != 0)
         {
-           foward = new Vector2(x, y);
+            foward = new Vector2(x, y);
         }
 
         _rb.velocity = new Vector2(x * _walkSpeed, y * _walkSpeed);
 
         if (_rb.velocity.magnitude != 0)
         {
-            _anim.SetBool("Walk",true);
+            _anim.SetBool("Walk", true);
             _anim.SetFloat("Walk.y", _rb.velocity.y);
             _anim.SetFloat("Walk.x", _rb.velocity.x);
             if (_rb.velocity.x < 0)
-            {　
+            {
                 //左横移動するときPlayerを反転
-                transform.rotation = Quaternion.Euler(0,180,0);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             if (_rb.velocity.x > 0)
             {
@@ -66,25 +66,25 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _anim.SetBool("Walk",false);
+            _anim.SetBool("Walk", false);
             _anim.SetFloat("Idle.y", foward.y);
             _anim.SetFloat("Idle.x", foward.x);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(other.gameObject.CompareTag(_enemyTag))
+        if (collision.gameObject.CompareTag(_enemyTag))
         {
-            //GM.GameOver();
+            GM.GameOver();
         }
-        else if(other.gameObject.CompareTag(_clearTag))
+        else if (collision.gameObject.CompareTag(_clearTag))
         {
-            //GM.EscapeText();
+            GM.EscapeText();
         }
-        else if(other.gameObject.CompareTag(_scoreTag))
+        else if (collision.gameObject.CompareTag(_scoreTag))
         {
-            //GM.AddScore(_score);
+            GM.AddScore(_score);
         }
     }
 }

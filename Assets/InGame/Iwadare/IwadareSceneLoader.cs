@@ -10,14 +10,14 @@ public class IwadareSceneLoader : SingletonMonovihair<IwadareSceneLoader>
     float _tempScore;
     private Text _resultScoreText;
     float _time;
-    [SerializeField] float _maxTime;
+    [SerializeField] float _maxTime = 100;
     private Text _resultTimeText;
     protected override bool _dontDestroyOnLoad { get{ return true; } }
 
     void Start()
     {
         _resultScoreText = GameObject.FindGameObjectWithTag("Respawn").GetComponent<Text>();
-        if (_resultScoreText) _resultScoreText.text = _tempScore.ToString("D7");
+        if (_resultScoreText) _resultScoreText.text = _tempScore.ToString("0000000");
         _resultTimeText = GameObject.FindGameObjectWithTag("Finish").GetComponent<Text>();
         if (_resultTimeText) _resultTimeText.text = string.Format("{0:00.00}", _time);
     }

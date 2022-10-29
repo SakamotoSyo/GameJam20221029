@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _time: {fileID: 1510926300237489433}
   _scoreText: {fileID: 1510926298992217254}
-  _countDown: 5
+  _countDown: 100
   _gameOverScene: 
   _gameCrearScene: 
   _timeOverText: {fileID: 1510926299630742622}
